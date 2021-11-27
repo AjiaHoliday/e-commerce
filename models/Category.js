@@ -20,6 +20,9 @@ Category.init(
       validate: {
         len: [3]
       }
+    },
+    category_desc: {
+      type: DataTypes.STRING
     }
   },
   {
