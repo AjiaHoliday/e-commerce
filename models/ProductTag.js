@@ -12,11 +12,11 @@ ProductTag.init(
         primaryKey: true,
         autoIncrement: true
       },
-      category_id: {
+      tag_id: {
           type: DataTypes.INTEGER,
           allowNull: false,
           references: {
-              model: 'category',
+              model: 'tag',
               key: 'id'
           }
       },

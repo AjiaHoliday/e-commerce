@@ -16,9 +16,8 @@ router.get('/', (req, res) => {
         },
         {
           model: Tag,
-          attributes: ['tag_name'],
-          through: ProductTag,
-          as: 'tagged_products'
+          as:'tags',
+          attributes: ['tag_name']
         }]
   })
     .then(dbProductData => res.json(dbProductData))
@@ -44,9 +43,8 @@ router.get('/:id', (req, res) => {
       },
       {
         model: Tag,
-        attributes: ['tag_name'],
-        through: ProductTag,
-        as: 'tagged_products'
+        as: 'tags',
+        attributes: ['tag_name']
       }]
   })
     .then(dbProductData => {
@@ -77,12 +75,12 @@ router.post('/', (req, res) => {
     price: req.body.price,
     stock: req.body.stock,
     category_id: req.body.category_id,
-    tagIds: req.body.tagIds
+    tags: req.body.tags
      })
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
-      if (req.body.tagIds.length) {
-        const productTagIdArr = req.body.tagIds.map((tag_id) => {
+      if (req.body.tags.length) {
+        const productTagIdArr = req.body.tags.map((tag_id) => {
           return {
             product_id: product.id,
             tag_id,
